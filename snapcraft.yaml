@@ -27,7 +27,7 @@ plugs:
 
 apps:
   tangram:
-    command: usr/bin/tangram
+    command: usr/bin/re.sonny.Tangram
     extensions: [gnome]
     common-id: re.sonny.Tangram
 
