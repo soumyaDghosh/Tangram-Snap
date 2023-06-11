@@ -1,2 +1,2 @@
 # Tangram-Snap
-Experimental Snap builds Of Tangram
+## Snap builds Of Tangram
