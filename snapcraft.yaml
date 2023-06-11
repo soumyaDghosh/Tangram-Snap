@@ -22,12 +22,6 @@ plugs:
 
 layout:
   /usr/lib/x86_64-linux-gnu/webkitgtk-6.0:
-    bind: $SNAP/webkitgtk-platform/usr/lib/x86_64-linux-gnu/webkitgtk-6.0
-
-environment:
-  # WORKAROUND: Add python modules in Snap to search path
-  PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
-
 
 apps:
   tangram-exp:
@@ -54,10 +48,6 @@ parts:
       - libgjs-dev
     build-snaps:
       - webkitgtk-6-gnome-2204-sdk/latest/edge  
-    override-build: |
-      craftctl default
-      # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
-      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/tangram-exp/current/usr/bin/tangram-exp
     organize:
       snap/tangram-exp/current/usr: usr
     
