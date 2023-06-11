@@ -15,6 +15,16 @@ slots:
     bus: session
     name: re.sonny.Tangram
 
+plugs:
+  webkitgtk-6-gnome-2204:
+    interface: content
+    target: $SNAP/webkitgtk-platform
+    default-provider: webkitgtk-6-gnome-2204
+
+layout:
+  /usr/lib/x86_64-linux-gnu/webkitgtk-6.0:
+    bind: $SNAP/webkitgtk-platform/usr/lib/x86_64-linux-gnu/webkitgtk-6.0
+
 environment:
   # WORKAROUND: Add python modules in Snap to search path
   PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
@@ -33,8 +43,15 @@ parts:
     source: https://github.com/sonnyp/Tangram.git
     plugin: meson
     parse-info: [usr/share/metainfo/re.sonny.Tangram.metainfo.xml]
+    build-environment:
+      - PKG_CONFIG_PATH: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig:$PKG_CONFIG_PATH
+      - PATH: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/bin:$PATH
+      - XDG_DATA_DIRS: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/share:$XDG_DATA_DIRS
+      - LD_LIBRARY_PATH: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib:/snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET:/snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib/webkitgtk-6.0:/snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/girepository-1.0:$LD_LIBRARY_PATH
     meson-parameters:
       - --prefix=/snap/tangram-exp/current/usr
+    build-snaps:
+      - webkitgtk-6-gnome-2204-sdk/latest/edge  
     override-build: |
       craftctl default
       # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
