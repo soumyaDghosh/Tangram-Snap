@@ -1,0 +1,44 @@
+name: tangram-exp
+base: core22
+adopt-info: tangram-exp
+grade: stable
+confinement: strict
+compression: lzo
+architectures:
+  - build-on: amd64
+  - build-on: armhf
+  - build-on: arm64
+
+slots:
+  tangram-exp:
+    interface: dbus
+    bus: session
+    name: re.sonny.Tangram
+
+environment:
+  # WORKAROUND: Add python modules in Snap to search path
+  PYTHONPATH: ${SNAP}/usr/lib/python3/dist-packages:$PYTHONPATH
+
+
+apps:
+  tangram-exp:
+    command: usr/bin/tangram
+    extensions: [gnome]
+    common-id: re.sonny.Tangram
+    desktop: usr/share/applications/re.sonny.Tangram.desktop
+
+
+parts:
+  tangram-exp:
+    source: https://github.com/sonnyp/Tangram.git
+    plugin: meson
+    parse-info: [usr/share/metainfo/re.sonny.Tangram.metainfo.xml]
+    meson-parameters:
+      - --prefix=/snap/tangram-exp/current/usr
+    override-build: |
+      craftctl default
+      # WORKAROUND: Use python from search path, the path detected by meson doesn't exist when running the Snap
+      sed -e '1c#!/usr/bin/env python3' -i ${CRAFT_PART_INSTALL}/snap/tangram-exp/current/usr/bin/tangram-exp
+    organize:
+      snap/tangram-exp/current/usr: usr
+    
