@@ -7,6 +7,11 @@ compression: lzo
 architectures:
   - build-on: amd64
     
+    
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0:
+    bind: $SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0    
+    
 slots:
   tangram:
     interface: dbus
@@ -18,10 +23,6 @@ plugs:
     interface: content
     target: $SNAP/webkitgtk-platform
     default-provider: webkitgtk-6-gnome-2204
-
-layout:
-  /usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0:
-    bind: $SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0
 
 
 apps:
