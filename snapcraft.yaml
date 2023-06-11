@@ -54,4 +54,14 @@ parts:
       - webkitgtk-6-gnome-2204-sdk/latest/edge  
     organize:
       snap/tangram/current: .
+  gst:
+    plugin: nil
+    stage-packages: 
+      - gir1.2-gstreamer-1.0
+    prime:
+      - usr/lib/x86_64-linux-gnu/girepository-1.0/Gst-1.0.typelib
+      - usr/lib/x86_64-linux-gnu/girepository-1.0/GstBase-1.0.typelib
+      - usr/lib/x86_64-linux-gnu/girepository-1.0/GstCheck-1.0.typelib
+      - usr/lib/x86_64-linux-gnu/girepository-1.0/GstController-1.0.typelib
+/usr/lib/x86_64-linux-gnu/girepository-1.0/GstNet-1.0.typelib
     
