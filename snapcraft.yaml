@@ -37,6 +37,7 @@ apps:
 parts:
   tangram:
     source: https://github.com/sonnyp/Tangram.git
+    source-tag: 'v3.0'
     plugin: meson
     parse-info: [ usr/share/metainfo/re.sonny.Tangram.metainfo.xml ]
     build-environment:
