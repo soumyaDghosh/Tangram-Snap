@@ -1,15 +1,14 @@
-name: tangram-exp
+name: tangram
 base: core22
-adopt-info: tangram-exp
+adopt-info: tangram
 grade: stable
 confinement: strict
 compression: lzo
 architectures:
   - build-on: amd64
-    build-for: amd64
     
 slots:
-  tangram-exp:
+  tangram:
     interface: dbus
     bus: session
     name: re.sonny.Tangram
@@ -21,21 +20,22 @@ plugs:
     default-provider: webkitgtk-6-gnome-2204
 
 layout:
-  /usr/lib/x86_64-linux-gnu/webkitgtk-6.0:
+  /usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0:
+    bind: $SNAP/webkitgtk-platform/usr/lib/$CRAFT_ARCH_TRIPLET/webkitgtk-6.0
+
 
 apps:
-  tangram-exp:
+  tangram:
     command: usr/bin/tangram
     extensions: [gnome]
     common-id: re.sonny.Tangram
-    desktop: usr/share/applications/re.sonny.Tangram.desktop
 
 
 parts:
-  tangram-exp:
+  tangram:
     source: https://github.com/sonnyp/Tangram.git
     plugin: meson
-    parse-info: [usr/share/metainfo/re.sonny.Tangram.metainfo.xml]
+    parse-info: [ usr/share/metainfo/re.sonny.Tangram.metainfo.xml ]
     build-environment:
       - PKG_CONFIG_PATH: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/lib/$CRAFT_ARCH_TRIPLET/pkgconfig:$PKG_CONFIG_PATH
       - PATH: /snap/webkitgtk-6-gnome-2204-sdk/current/usr/bin:$PATH
