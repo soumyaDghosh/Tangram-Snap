@@ -64,5 +64,6 @@ parts:
       - usr/lib/x86_64-linux-gnu/girepository-1.0/GstBase-1.0.typelib
       - usr/lib/x86_64-linux-gnu/girepository-1.0/GstCheck-1.0.typelib
       - usr/lib/x86_64-linux-gnu/girepository-1.0/GstController-1.0.typelib
-/usr/lib/x86_64-linux-gnu/girepository-1.0/GstNet-1.0.typelib
+
+#/usr/lib/x86_64-linux-gnu/girepository-1.0/GstNet-1.0.typelib
     
